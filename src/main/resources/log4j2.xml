@@ -8,6 +8,7 @@
                      filePattern="${baseDir}/hippodrome.%d{yyyy-MM-dd}.log">
             <PatternLayout pattern="%d %level %c: %m%n"/>
             <Policies>
+<!--                <CronTriggeringPolicy schedule="0 * * * * ?"/>-->  <!--every hour-->
                 <TimeBasedTriggeringPolicy/>
                 <SizeBasedTriggeringPolicy size="10 MB"/>
             </Policies>
