@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="warn" name="MyApp">
+    <Properties>
+        <Property name="baseDir">logs</Property>
+    </Properties>
+    <Appenders>
+        <RollingFile name="RollingFile" fileName="${baseDir}/hippodrome.log"
+                     filePattern="${baseDir}/hippodrome.%d{yyyy-MM-dd}.log">
+            <PatternLayout pattern="%d %level %c: %m%n"/>
+            <Policies>
+<!--                <CronTriggeringPolicy schedule="0 * * * * ?"/>-->  <!--every hour-->
+                <TimeBasedTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="10 MB"/>
+            </Policies>
+            <DefaultRolloverStrategy>
+                <Delete basePath="${baseDir}">
+                    <IfFileName glob="*/hippodrome*.log"/>
+                    <IfLastModified age="P7D"/>
+                </Delete>
+            </DefaultRolloverStrategy>
+        </RollingFile>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d %level %c: %m%n"/>
+        </Console>
+    </Appenders>
+    <Loggers>
+        <Root level="all">
+            <AppenderRef ref="RollingFile"/>
+        </Root>
+    </Loggers>
+</Configuration>
